@@ -43,7 +43,7 @@
     </nav>
 
 
-        <div class="container">
+      
             <?php
                 // recuperation de PPROFIL
                 require_once('init/style.php');
@@ -61,9 +61,7 @@
                 require_once('CV/contact.php');
                 echo '<hr>';
             ?>
-
-        </div>
-        <!-- .container -->
+ 
             
         <?php
             require('ajax/index.php');
@@ -83,39 +81,11 @@
             <div class="text-center">
                 <a href="http://facebook.com"><i class="fab fa-facebook-square fa-3x p-3 text-white"></i></a>
                 <a href="https://fr.linkedin.com"><i class="fab fa-linkedin fa-3x p-3 text-white"></i></a>
-                <a href="hhttps://github.com/TraoreAssa/"><i class="fab fa-github-square fa-3x p-3  text-white"></i></a>
+                <a href="https://github.com/TraoreAssa"><i class="fab fa-github-square fa-3x p-3  text-white"></i></a>
             </div>
 
         </footer>
 
-
-
-  <!-- ******************** redirection vers le formulaire Commentaire au click du bouton pour ajouter ********************** -->
-        <!-- <script>
-            $(document).ready(function() {
-                $('#ajouter').click(function(event) {
-                    //ajouter est le bouton ajout com
-                    // alert('Tout est OK !');
-
-                    $.ajax({
-                        url: "Ajax-commentaires/formulaire.php", // URL de destination
-                        dataType: "text", // Type de donnée
-                        success: function(data) {
-                            //data est la reponse de ma requete (requete retour (success))
-                            /* 
-                            En cas de succes de requetes, la réponse de la requete est stockée dans 'data
-                            La methode "ajax()" se charge de tout faire, la réponse de la requete est parsé au format JSON, sinon on ne pourrais pas vévivuler des données en HTTP
-                            */
-                            $('#demo').html(data);
-                            /* 
-                            On séléctionne la div id " demo" dans la quelle on accroche le resultat de la requete AJAX contenu dans data 
-                            */
-                        }
-                    });
-
-                });
-            });
-        </script>  -->
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

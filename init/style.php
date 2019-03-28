@@ -1,17 +1,16 @@
 <style type="text/css">
     body {
-        background: black;
+        /* background: black; */
+    background: linear-gradient(to top, rgb(204,166,164), rgb(199,102,102));
+
         margin: 0 auto;
     }
 
-    nav a:hover{
-    background: pink;
-    transition: 2s;
-    padding: 20px;
-
-    }
+   
     .container {
-        background: white;
+        background: lightgrey;
+        border: 5px solid blue;
+        border-radius:10px;
     }
 
     
@@ -36,47 +35,62 @@
         color: pink;
         text-decoration:  none;
     }
-    section{
-        /* margin:10px; */
-    }
+  
     hr{
         color: gainsboro;
+        size:25px;
+    }
 
+  
+    .container{
+        overflow-y: hidden;
+        border: 5px solid #550000;
+        border-radius:10px;
+        margin-top:5px;
+        box-shadow: 10px 5px 5px #550000;
+    }
+
+    section, iframe{
+        box-shadow: 10px 10px 5px 5px black;
+        padding:2px;
+        margin:10px;
+        border-radius:10px;
+    }
+
+    .site:hover{
+        color:white;
+        font-size:25px;
     }
 
 
-    /* nav {
-        text-align: center;
-        font-size: 30px;
+    i{
+        color:grey;
     }
-    nav a{
-        text-decoration: none;
-        color: black;
-        margin: 20px;
-    }
-    hr{
-        color: gainsboro;
 
+    i:hover{
+        color:blue;
     }
-    p{
-        margin: 20px;
-    } */
 
-    body{
-        margin: 0;
-    }
-    .content{
-        margin: 1% 3%;
+    /* NAV */
+    nav a:hover{
+    background: #550000;
+    transition: 2s;
+    padding: 20px;
+    width:100%;
     }
     .mainMenu{
         display: block;
-        position: relative;/* les éléments vont bougé -> relative permet de les faires bouger // *si pas de position relative .content va se mettre au dessus de la nav */
+        position: relative;
+        /* les éléments vont bougé -> relative permet de les faires bouger // *si pas de position relative .content va se mettre au dessus de la nav */
         width: 100%;
         margin: 0;
         padding: 0;
         text-align: center;
         border-bottom: 1px solid #ccc;
         box-shadow: 0 0 3px 5px;
+    }
+    .content{
+        margin: 1% 3%;
     }
     .menu{
         width: 100%;
@@ -106,6 +120,8 @@
     .menu a:hover{
         color: #666;
     }
+
+    /* burger nav */
     label.menuTitle{
         text-align: left;
         font-size: 30px;
@@ -115,7 +131,7 @@
         display: block;
         font-weight: bold;
         cursor: pointer;
-        background: url(image/menu.jpg) no-repeat 100% 40%;
+        background: url(image/menu.png) no-repeat 100% 40%;
         background-size: 44px 39px;
         float: right; 
     }
@@ -129,9 +145,11 @@
     .clear{
         clear: both;
     }
+    /* Fin de la NAV */
 
-    /* Effet survol avec transition et filtres COMPETENCEs */
    
+
+    /* Effet survol avec transition et filtres COMPETENCES */
     .comp li{
         list-style: none;
         width: 241px;
@@ -156,7 +174,10 @@
         filter: grayscale(1) blur(8px);
     }
 
-    /* mobile */
+    /* Fin des compétences */
+    
+
+    /* V mobile */
     @media screen and (min-width:970px){
         label.menuTitle{
             display: none;
@@ -169,8 +190,103 @@
             display: inline;
             border:none;
         }
+        
     }
 
+    /* -------------------------------------------------------------------------------------------- */
 
+    /* html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to top, rgb(204,166,164), rgb(199,102,102));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lato';
+    overflow: hidden;
+} */
+
+
+#profil .card {
+    border-radius: 16px;
+    width: 660px;
+    height: 660px;
+    /* background: url(image/Avatar.png) no-repeat; */
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 50px rgba(0,0,0,0.85);
+}
+
+
+#profil .card::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.92);
+}
+
+
+#profil .card .img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+
+#profil .card .img span {
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-size:50px;
+    transition: 0.5s;
+    top:250px;
+}
+
+
+#profil .card .img span:nth-child(1) {
+    transition-delay: 0s;
+    background-position: 0;
+}
+
+#profil .card .img span:nth-child(2) {
+    transition-delay: 0.1s;
+    background-position: 33.33%;
+}
+#profil .card .img span:nth-child(3) {
+    transition-delay: 0.2s;
+    background-position: 66.66%;
+}
+#profil .card .img span:nth-child(4) {
+    transition-delay: 0.3s;
+    background-position: 100%;
+}
+
+#profil .card:hover .img > span {
+    transform: translateY(-100%);
+}
+
+
+.content { 
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    padding: 20px 20px;
+    width: 100%;
+    height: 100%;
+    transform: translateY(100%);
+}
+
+#profil .card:hover .content {
+    transform: translateY(0%);
+    transition: 1s;
+    transition-delay: 0.1s;
+}
 
 </style> 

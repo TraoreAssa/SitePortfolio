@@ -2,7 +2,6 @@
 require_once('init/init.php');
 //BDD
 ?>
-<p>Bienvenue sur mon Site-PortFolio <br></p>
 <?php
 // ---------------------------- Recuperation Des champs de la BDD --------
 
@@ -10,24 +9,33 @@ require_once('init/init.php');
   $resul = $bdd->query("SELECT titre_cv, description FROM titre_cv");
   while ($cv = $resul->fetch(PDO::FETCH_ASSOC)) {
     foreach ($cv as $key => $value) {
-      echo '<h1 class="display-3 border-raduis text-center">' .  $value . ' </h1>' . '<br>';
+      echo '<h1 class="display-1 border-raduis text-center">' .  $value . ' </h1>' . '<br>';
     }
   }
 
 ?>
 
+<p class="text-center display-5 site">Bienvenue sur mon Site-PortFolio <br></p>
+
+
 <section id='profil'>
   <div class='jumbotron col-10 offset-1'>
-      <h2 class='display-4 text-center' >Présentation: </h2>
-      <hr class='my-4'>
-      <div class="row">
-        <?php
-              
-          echo ' <div class="col-12 display-5 text-center"> ';
+    <h2 class='display-4 text-center'>Présentation: </h2>
+    <hr class='my-4'>
+    <div class="row justify-content-center">
+      <div class="card">
+        <div class="img text-center ">
+          <span>P</span>
+          <span>R</span>
+          <span>O</span>
+          <span>F</span>
+          <span>I</span>
+          <span>L</span>
 
-          //  ------------ Requette NOM, PRENOM .. ------------
-
-          $resultat = $bdd->query("SELECT * FROM utilisateur WHERE id_utilisateur = 1");
+        </div>
+        <div class="content">
+          <?php
+                $resultat = $bdd->query("SELECT * FROM utilisateur WHERE id_utilisateur = 1");
           while ($utilisateur = $resultat->fetch(PDO::FETCH_ASSOC)) :
 
             //  ------------ AVATAR ------------
@@ -48,18 +56,31 @@ require_once('init/init.php');
           <br>
           <!-- <p></p> -->
           <label for="cv-pdf">Télécharger mon cv en format PDF</label> <br>
-          <input type="button" class='bg-dark text-white p-2' value="Télécharger" onclick="window.location='CV-Traore-Assa-Developpeur-Web.pdf'">
+          <input type="button" class='bg-dark text-white p-2' value="Télécharger"
+            onclick="window.location='CV-Traore-Assa-Developpeur-Web.pdf'">
 
 
 
           <?php endwhile; ?>
-          </div>
+
+        </div>
       </div>
+    </div>
   </div>
+  </div>
+
+
+
+
 </section>
+
+
+
+
+
 
 
 <?php
 // require_once('init/footer.php');
 //Footer
-?> 
+?>
