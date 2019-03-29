@@ -6,9 +6,11 @@ class CommentairesController
     private $db;
     public function __construct()
     {
-        $this->db = new \model\EntityCommentairesRepository; // permet de récuperer une connexion a la BDD qui se trouve dans le fichier EntityCommentairesRepository.php
+        $this->db = new \model\EntityCommentairesRepository; 
+        // permet de récuperer une connexion a la BDD qui se trouve dans le fichier EntityCommentairesRepository.php
     }    
-    public function handlerRequest() // permet de savoir ce que l'internaute demande (afficher/modifier/supprimer), action de l'internaute 
+    public function handlerRequest() 
+    // permet de savoir ce que l'internaute demande (afficher/modifier/supprimer), action de l'internaute 
     {
         // Action de l'internaut! (afficher/modifier/supprimer) si...
         try
@@ -19,18 +21,12 @@ class CommentairesController
             elseif($op == 'delete')$this->delete(); // si on supprime un element, on appel la méthode delete();
             else $this->selectAll(); // permettra d'afficher l'ensemble des elements(); 
             
-            // $page = isset($_GET['page']) ? $_GET['page'] : NULL;
-            // if ($page == 'loisirs') $this-> loisirs();
-            // elseif ($page == 'experiences') $this-> experiences();
-            // elseif ($page == 'formations') $this-> formations();
-            // elseif ($page == 'realisation') $this-> realisation();
-            // elseif ($page == 'photo') $this-> photo();
-            // elseif ($page == 'utilisateur') $this-> utilisateur();
         
         }
         catch(Exception $e)
         {
-            throw new Exception($e->getMessage());// permet d'afficher un message en cas d'erreur
+            throw new Exception($e->getMessage());
+            // permet d'afficher un message en cas d'erreur
             
         }
     }   
@@ -38,7 +34,8 @@ class CommentairesController
     //------------------------------------------ AFFICHER SUR L'INDEX ------------------------------------------ 
 
     // $this->render('layout.php', 'donnees.php', 'parametres' );
-    public function render($layout, $template, $parameters = array())// sert a tout prendre et revoyer sur l'index
+    public function render($layout, $template, $parameters = array())
+    // sert a tout prendre et revoyer sur l'index
     {
         extract($parameters);// permet d'avoir mes paramettres (des tableau en) dans une variable
         ob_start(); //commence la temporisation, ob_start()demarrer la temporisation de sortie
@@ -60,14 +57,10 @@ class CommentairesController
     {
         header("Location:" . $url); // fonction prédefinie permettant d'effectuer une redirection
     }
-   
 
-    public function loisirs()
-    {
-        $this->render('layout.php', 'loisirs.php');
-    }
+
     
-    //------------------------------------------ AFFICHER TOUT  S ------------------------------------------
+    //------------------------------------------ AFFICHER TOUT  ------------------------------------------
     public function selectAll()
     {
     // echo 'Methode selectAll()';
@@ -78,7 +71,7 @@ class CommentairesController
             'title'=>'Commentaires', // $title  dans l'index
             'donnees'=>$this->db->selectAll(), // $donnees dans l'index
             'fields' =>$this->db->getFields(),
-            'id' => 'id_' . $this->db->table// affiche id s, cela servira a pointé sur l'indice id  du tableau de données envoyer dans le layout pour les lien voir/modifier/supprimer
+            'id' => 'id_' . $this->db->table// affiche id , cela servira a pointé sur l'indice id  du tableau de données envoyer dans le layout pour les lien voir/modifier/supprimer
         ));
  
  
@@ -90,8 +83,6 @@ class CommentairesController
 
         $values = ($op == 'update') ? $this->db->select($id) : ''; // si on a envoyé un id dans l'URL, on l'envoi en argument de la méthode select() de EntityCommentairesRepository, cela permettra de selectionner toute les données de l'element pour les modification.
 
-        //$value = ($op == 'add') ? $this->db->select($id) : ''; 
-        //var_dump($values);
 
         if($_POST)
         {
@@ -108,6 +99,7 @@ class CommentairesController
             $title = 'Modification ' . $id; 
         }
         
+        
         $this->render('layout.php', 'form.php', array(
             "title"=> $title, 
             "op"=>$op, 
@@ -119,7 +111,20 @@ class CommentairesController
         ));
         
     }
+        //------------------------------------------ AFFICHER UN ELELMENT  ------------------------------------------ 
 
+    public function select()
+    {
+    $id = isset($_GET['id']) ? $_GET['id'] : NULL   ;
+               
+        $this->render('layout.php', 'details.php', array(
+            "title"=>"Détail de l'élément : $id", 
+            "fields" =>$this->db->getFields(),
+            'donnees'=>$this->db->select($id),
+            'id' => 'id_' . $this->db->table
+
+        ));
+    }
     //------------------------------------------ SUPPRIMER  ------------------------------------------ 
     public function delete()
     {

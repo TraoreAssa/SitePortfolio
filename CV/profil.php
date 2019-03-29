@@ -18,20 +18,14 @@ require_once('init/init.php');
 <p class="text-center display-5 site">Bienvenue sur mon Site-PortFolio <br></p>
 
 
-<section id='profil'>
-  <div class='jumbotron col-10 offset-1'>
-    <h2 class='display-4 text-center'>Présentation: </h2>
-    <hr class='my-4'>
+<section id='profil' class="p-50">
+  <div >
+
     <div class="row justify-content-center">
       <div class="card">
         <div class="img text-center ">
-          <span>P</span>
-          <span>R</span>
-          <span>O</span>
-          <span>F</span>
-          <span>I</span>
-          <span>L</span>
-
+           <span>Presentation :</span>
+        
         </div>
         <div class="content">
           <?php
@@ -68,6 +62,7 @@ require_once('init/init.php');
     </div>
   </div>
   </div>
+  <hr>
 
 
 

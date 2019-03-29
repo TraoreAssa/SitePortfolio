@@ -19,13 +19,6 @@ class CVController
             elseif($op == 'delete')$this->delete(); // si on supprime un element, on appel la méthode delete();
             else $this->selectAll(); // permettra d'afficher l'ensemble des elements(); 
             
-            // $page = isset($_GET['page']) ? $_GET['page'] : NULL;
-            // if ($page == 'loisirs') $this-> loisirs();
-            // elseif ($page == 'experiences') $this-> experiences();
-            // elseif ($page == 'formations') $this-> formations();
-            // elseif ($page == 'realisation') $this-> realisation();
-            // elseif ($page == 'photo') $this-> photo();
-            // elseif ($page == 'utilisateur') $this-> utilisateur();
         
         }
         catch(Exception $e)
@@ -67,7 +60,7 @@ class CVController
         $this->render('layout.php', 'loisirs.php');
     }
     
-    //------------------------------------------ AFFICHER TOUT  S ------------------------------------------
+    //------------------------------------------ AFFICHER TOUT LES DONNEES ------------------------------------------
     public function selectAll()
     {
     // echo 'Methode selectAll()';
@@ -83,20 +76,20 @@ class CVController
  
  
      }
-    //------------------------------------------ AFFICHER UN    ------------------------------------------ 
+      //------------------------------------------ AFFICHER UN ELELMENT  ------------------------------------------ 
 
-    public function select()
-    {
-    $id = isset($_GET['id']) ? $_GET['id'] : 'NULL';
-               
-        $this->render('layout.php', ' details.php', array(
-            "title"=>"Détail de l'element : $id", 
-            "fields" =>$this->db->getFields(),
-            'donnees'=>$this->db->select($id),
-            'id' => 'id_' . $this->db->table
-
-        ));
-    }
+      public function select()
+      {
+      $id = isset($_GET['id']) ? $_GET['id'] : NULL   ;
+                 
+          $this->render('layout.php', 'details.php', array(
+              "title"=>"Détail de l'élément : $id", 
+              "fields" =>$this->db->getFields(),
+              'donnees'=>$this->db->select($id),
+              'id' => 'id_' . $this->db->table
+  
+          ));
+      }
     //------------------------------------------ AJOUTER OU MOTIFIER  ------------------------------------------ 
     public function save($op)
     {

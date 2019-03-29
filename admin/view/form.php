@@ -1,5 +1,18 @@
 <?php
  // echo '<pre>'; print_r($fields); echo '</pre>';
+
+
+//  function securisation($donnees){
+//     $donnees = trim($donnees);
+//     $donnees = stripcslashes($donnees);
+//     $donnees = strip_tags($donnees);
+//     return $donnees ;
+// }
+
+// $secu = securisation($_POST['Field']);
+// $prenoms = securisation($_POST['prenoms']);
+
+
 ?>
 
 <form action="" method="post" class="col-md-6 offset-md-3 text-center">
@@ -13,6 +26,8 @@
 
     foreach ($fields as $value) :
 
+      
+
         if ($value['Field'] == "code_postal") {
             $maxlength = '5';
         } elseif ($value['Field'] == "telephone") {
@@ -20,6 +35,8 @@
         } else {
             $maxlength = null;
         }
+
+
 
         // if($value['Field'] == "mdp"){
         //     sha1($value['mdp']);
@@ -48,8 +65,10 @@
         <?php endforeach; ?>
 
     </div>
+
     <input type="submit" class="col-md-6 btn btn-primary mb-2">
 </form>
+
 
 
 

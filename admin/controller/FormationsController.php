@@ -15,10 +15,10 @@ class FormationsController
         try
         {
             $op = isset($_GET['op']) ? $_GET['op'] : NULL; // si op est definie dans l'URL, on le recupere, on le stock dans $op sinon, si rien n'est definie dans l'URL,on stock NULL dans $op
-            if ($op == 'add' || $op == 'update') $this->save($op); // si on ajoute ou modifie un employé, on appel la méthode save();
-            elseif($op == 'select')$this->select(); // si on selectionne un employé, on appel la méthode select();
-            elseif($op == 'delete')$this->delete(); // si on supprime un employé, on appel la méthode delete();
-            else $this->selectAll(); // permettra d'afficher l'ensemble des employés();  
+            if ($op == 'add' || $op == 'update') $this->save($op); // si on ajoute ou modifie un élément, on appel la méthode save();
+            elseif($op == 'select')$this->select(); // si on selectionne un élément, on appel la méthode select();
+            elseif($op == 'delete')$this->delete(); // si on supprime un élément, on appel la méthode delete();
+            else $this->selectAll(); // permettra d'afficher l'ensemble des éléments();  
         }
         catch(Exception $e)
         {
@@ -55,7 +55,7 @@ class FormationsController
 
    
     
-    //------------------------------------------ AFFICHER TOUT EMPLOYES ------------------------------------------
+    //------------------------------------------ AFFICHER TOUT élément ------------------------------------------
     public function selectAll()
     {
     // echo 'Methode selectAll()';
@@ -66,25 +66,25 @@ class FormationsController
             'title'=>'Formations', // $title  dans l'index
             'donnees'=>$this->db->selectAll(), // $donnees dans l'index
             'fields' =>$this->db->getFields(),
-            'id' => 'id_' . $this->db->table// affiche idEmployes, cela servira a pointé sur l'indice idEmploye du tableau de données envoyer dans le layout pour les lien voir/modifier/supprimer
+            'id' => 'id_' . $this->db->table// affiche id, cela servira a pointé sur l'indice id du tableau de données envoyer dans le layout pour les lien voir/modifier/supprimer
         ));
  
  
      }
-    //------------------------------------------ AFFICHER UN EMPLOYE  ------------------------------------------ 
+   //------------------------------------------ AFFICHER UN ELELMENT  ------------------------------------------ 
 
-    public function select()
-    {
-    $id = isset($_GET['id']) ? $_GET['id'] : 'NULL';
-               
-        $this->render('layout.php', ' details.php', array(
-            "title"=>"Détail de l'employé : $id", 
-            "fields" =>$this->db->getFields(),
-            'donnees'=>$this->db->select($id),
-            'id' => 'id_' . $this->db->table
+   public function select()
+   {
+   $id = isset($_GET['id']) ? $_GET['id'] : NULL   ;
+              
+       $this->render('layout.php', 'details.php', array(
+           "title"=>"Détail de l'élément : $id", 
+           "fields" =>$this->db->getFields(),
+           'donnees'=>$this->db->select($id),
+           'id' => 'id_' . $this->db->table
 
-        ));
-    }
+       ));
+   }
     //------------------------------------------ AJOUTER OU MOTIFIER  ------------------------------------------ 
     public function save($op)
     {

@@ -15,10 +15,10 @@ class ExperiencesController
         // Action de l'internaut! (afficher/modifier/supprimer) si...
         try {
             $op = isset($_GET['op']) ? $_GET['op'] : null; // si op est definie dans l'URL, on le recupere, on le stock dans $op sinon, si rien n'est definie dans l'URL,on stock NULL dans $op
-            if ($op == 'add' || $op == 'update') $this->save($op); // si on ajoute ou modifie un employé, on appel la méthode save();
-            elseif ($op == 'select') $this->select(); // si on selectionne un employé, on appel la méthode select();
-            elseif ($op == 'delete') $this->delete(); // si on supprime un employé, on appel la méthode delete();
-            else $this->selectAll(); // permettra d'afficher l'ensemble des employés();  
+            if ($op == 'add' || $op == 'update') $this->save($op); // si on ajoute ou modifie un élément, on appel la méthode save();
+            elseif ($op == 'select') $this->select(); // si on selectionne un élément, on appel la méthode select();
+            elseif ($op == 'delete') $this->delete(); // si on supprime un élément, on appel la méthode delete();
+            else $this->selectAll(); // permettra d'afficher l'ensemble des données();  
         } catch (Exception $e) {
             throw new Exception($e->getMassage()); // permet d'afficher un message en cas d'erreur
         }
@@ -27,7 +27,7 @@ class ExperiencesController
     //------------------------------------------ AFFICHER SUR L'INDEX ------------------------------------------ 
 
     // $this->render('layout.php', 'donnees.php', 'parametres' );
-    public function render($layout, $template, $parameters = array()) // sert a tout prendre et revoyer sur l'index
+    public function render($layout, $template, $parameters = array()) // sert a tout prendre et renvoyer sur l'index
     {
         extract($parameters); // permet d'avoir mes paramettres (des tableau en) dans une variable
         ob_start(); //commence la temporisation, ob_start()demarrer la temporisation de sortie
@@ -50,7 +50,7 @@ class ExperiencesController
         header("Location:" . $url); // fonction prédefinie permettant d'effectuer une redirection
     }
 
-    //------------------------------------------ AFFICHER TOUT EMPLOYES ------------------------------------------
+    //------------------------------------------ AFFICHER TOUT ELEMENTS ------------------------------------------
     public function selectAll()
     {
         // echo 'Methode selectAll()';
@@ -61,19 +61,19 @@ class ExperiencesController
             'title' => 'Experiences', // $title  dans l'index
             'donnees' => $this->db->selectAll(), // $donnees dans l'index
             'fields' => $this->db->getFields(),
-            'id' => 'id_' . $this->db->table // affiche idEmployes, cela servira a pointé sur l'indice idEmploye du tableau de données envoyer dans le layout pour les lien voir/modifier/supprimer
+            'id' => 'id_' . $this->db->table // affiche id, cela servira a pointé sur l'indice id du tableau de données envoyer dans le layout pour les lien voir/modifier/supprimer
         ));
     }
-    //------------------------------------------ AFFICHER UN EMPLOYE  ------------------------------------------ 
+    //------------------------------------------ AFFICHER UN ELELMENT  ------------------------------------------ 
 
     public function select()
     {
-        $id = isset($_GET['id']) ? $_GET['id'] : 'NULL';
-
-        $this->render('layout.php', ' details.php', array(
-            "title" => "Détail de l'employé : $id",
-            "fields" => $this->db->getFields(),
-            'donnees' => $this->db->select($id),
+    $id = isset($_GET['id']) ? $_GET['id'] : NULL   ;
+               
+        $this->render('layout.php', 'details.php', array(
+            "title"=>"Détail de l'élément : $id", 
+            "fields" =>$this->db->getFields(),
+            'donnees'=>$this->db->select($id),
             'id' => 'id_' . $this->db->table
 
         ));
@@ -123,10 +123,4 @@ class ExperiencesController
         $this->redirect('experiences.php');
     }
 }
-/* 
-    title => $title dans layout;
-    fields => $fields dasn tout mes fichiers(permet de recuperer les nom de colonne de la BDD);
-    donnees => $donnees
 
-
-*/

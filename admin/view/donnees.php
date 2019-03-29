@@ -5,6 +5,7 @@
 // var_dump($donnees);
 // echo '<pre>';print_r($fields); echo '</pre>';
 // echo '<pre>';print_r($donnees); echo '</pre>';
+
 ?>
 <div>
     <a href="?op=add" class="btn btn-larg btn-info"><i class="fas fa-plus"></i> Ajouter</a>
@@ -25,6 +26,7 @@
         <?php endforeach;?>
 
        
+        <th>Voir+</th>
         <th>Modif</th>
         <th>Supp</th>
 
@@ -33,8 +35,11 @@
 
     <!----------- Récuperer les données interieur du tableau ----------->
     <?php 
-    
     foreach ($donnees as $value):
+
+        
+      
+
     ?>
    
     <tr>
@@ -42,7 +47,9 @@
         <?=implode('</td><td>', $value)?>
         </td>
     
-
+        <td>
+        <a href="?op=select&id=<?=$value[$id] ?>"class="text-dark"><i class="fas fa-search"></i></a>
+        </td>
         <td>
         <a href="?op=update&id=<?=$value[$id] ?>"class="text-dark"><i class="fas fa-pen"></i></a>
         </td>

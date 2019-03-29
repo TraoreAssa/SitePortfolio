@@ -46,20 +46,15 @@
       
             <?php
                 // recuperation de PPROFIL
-                require_once('init/style.php');
-                echo '<hr>';
+                require_once('init/style.php'); 
 
-                require_once('CV/experiences.php');
-                echo '<hr>';
+                require_once('CV/experiences.php'); 
 
-                require_once('CV/formations.php');
-                echo '<hr>';
+                require_once('CV/formations.php');  
 
-                require_once('JavaScript/competences.php');
-                echo '<hr>';
+                require_once('JavaScript/competences.php'); 
 
-                require_once('CV/contact.php');
-                echo '<hr>';
+                require_once('CV/contact.php'); 
             ?>
  
             

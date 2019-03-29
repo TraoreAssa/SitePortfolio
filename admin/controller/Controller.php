@@ -15,24 +15,11 @@ class Controller
         try
         {
             $op = isset($_GET['op']) ? $_GET['op'] : NULL; // si op est definie dans l'URL, on le recupere, on le stock dans $op sinon, si rien n'est definie dans l'URL,on stock NULL dans $op
-            if ($op == 'add' || $op == 'update') $this->save($op); // si on ajoute ou modifie un employé, on appel la méthode save();
-            elseif($op == 'select')$this->select(); // si on selectionne un employé, on appel la méthode select();
-            elseif($op == 'delete')$this->delete(); // si on supprime un employé, on appel la méthode delete();
+            if ($op == 'add' || $op == 'update') $this->save($op); // si on ajoute ou modifie un élément, on appel la méthode save();
+            elseif($op == 'select')$this->select(); // si on selectionne un élément, on appel la méthode select();
+            elseif($op == 'delete')$this->delete(); // si on supprime un élément, on appel la méthode delete();
             // elseif($op == 'cv')$this->cv(); 
-            else $this->selectAll(); // permettra d'afficher l'ensemble des employés();  
-
-            #page
-            // $page = isset($_GET['page']) ? $_GET['page'] : NULL; // si page est definie dans l'URL, on le recupere, on le stock dans $page sinon, si rien n'est definie dans l'URL,on stock NULL dans $page
-            // if ($page == NULL) $this->connexion(); 
-            // elseif ($page == 'connexion') $this->connexion(); 
-            // elseif ($page == 'utilisateur') $this->utilisateur(); 
-            // elseif ($page == 'experiences') $this->experiences(); 
-            // elseif ($page == 'competences') $this->competences(); 
-            // elseif ($page == 'formations') $this->formations(); 
-            // elseif ($page == 'loisirs') $this->loisirs(); 
-            // elseif ($page == 'realisations') $this->realisations(); 
-            // elseif ($page == 'cv') $this->cv(); 
-            
+            else $this->selectAll(); // permettra d'afficher l'ensemble des donnees;  
 
         }
         catch(Exception $e)
@@ -67,55 +54,8 @@ class Controller
     {
         header("Location:" . $url); // fonction prédefinie permettant d'effectuer une redirection
     }
-    
 
-
-    //------------------------------------------ Fonction de mes pages ------------------------------------------
-    
-    // public function connexion()
-    // {
-    //     extract($_POST);
-    //     if($_POST){
-    //         if($this->db->connexion($pseudo, $mdp)){
-    //             $_SESSION['pseudo'] = $pseudo;
-    //             echo '<spript> alert("session ok") </spript>';
-    //             $this->render('layout.php', 'utilisateur.php');
-    //         }
-    //         else{
-    //             echo '<spript> alert("Erreur") </spript>';
-    //         }
-    //     }
-        
-    //     $this->render('layout.php', 'index.php');
-    // }
-
-    // public function cv()
-    // {
-    //     $this->render('layout.php', 'cv.php');
-    // } 
-    // public function competences()
-    // {
-    //     $this->render('layout.php', 'competences.php');
-    // } 
-    // public function formations()
-    // {
-    //     $this->render('layout.php', 'formations.php');
-    // } 
-    // public function loisirs()
-    // {
-    //     $this->render('layout.php', 'loisirs.php');
-    // } 
-    // public function realisations()
-    // {
-    //     $this->render('layout.php', 'realisations.php');
-    // } 
-    // public function cv()
-    // {
-    //     $this->render('layout.php', 'cv.php');
-    // } 
-
-    
-
+   
 
     //------------------------------------------ AFFICHER TOUT ELELMENT ------------------------------------------
     public function selectAll()
@@ -138,10 +78,10 @@ class Controller
 
     public function select()
     {
-    $id = isset($_GET['id']) ? $_GET['id'] : 'NULL';
+    $id = isset($_GET['id']) ? $_GET['id'] : NULL   ;
                
-        $this->render('layout.php', 'detail.php', array(
-            "title"=>"Détail de l'employé : $id", 
+        $this->render('layout.php', 'details.php', array(
+            "title"=>"Détail de l'élément : $id", 
             "fields" =>$this->db->getFields(),
             'donnees'=>$this->db->select($id),
             'id' => 'id_' . $this->db->table
@@ -154,16 +94,20 @@ class Controller
 
         $id = isset($_GET['id']) ? $_GET['id'] : 'NULL'; // permet de savoir si un id a été envoyé dans l'URL, si on clique sur 'modifier' on envoi l'id dans l'URL et on le recupere, sinon c'est un ajout
 
-        $values = ($op == 'update') ? $this->db->select($id) : ''; // si on a envoyé un id dans l'URL, on l'envoi en argument de la méthode select() de EntityRepository, cela permettra de selectionner toute les données de l'employé pour les modification.
+        $values = ($op == 'update') ? $this->db->select($id) : ''; // si on a envoyé un id dans l'URL, on l'envoi en argument de la méthode select() de EntityRepository, cela permettra de selectionner toute les données de l'élément pour les modification.
 
         //$value = ($op == 'add') ? $this->db->select($id) : ''; 
         //var_dump($values);
+
+        
 
         if($_POST)
         {
             $r = $this->db->save(); // lorque l'on valide le formulaire d'ajout, on execute la methode save() du fichier EntityRepository .
             $this->redirect('utilisateur.php');
+            
         }
+        
         
         $title = $op; 
           
@@ -180,7 +124,7 @@ class Controller
             "op"=>$op, 
             'donnees'=>$this->db->selectAll(),
             "fields" =>$this->db->getFields(), // cest ce qui va nous permettre de recuperer le nom des champs pour les définir de facon générique
-            "values" => $values // recuperer toute les donnée de l'employé en cas de modif
+            "values" => $values // recuperer toute les donnée de l'élément en cas de modif
         ));
         
     }
@@ -193,7 +137,11 @@ class Controller
         $this->redirect('utilisateur.php');
  
     }
+
+
    
 }
+
+
 
 

@@ -20,10 +20,7 @@
   <?php
 session_start();
 
-// $bdd = new PDO('mysql:host=localhost;dbname=siteportfolio', 'root', '');
-// require_once('../CV/init/init.php');
-// require_once('../CV/init/style.php');
-
+$bdd = new PDO('mysql:host=localhost;dbname=siteportfolio', 'root', '');
 
 if (isset($_POST['formconnexion']))
 {
